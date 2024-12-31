@@ -6,11 +6,13 @@ module.exports = (io) => {
         socket.on("disconnect", async () => {
             console.log("client is emoji-server disconnected ", socket.id);
         });
-        socket.on("sendMessage", async (message, user, cb) => {
+        socket.on("sendMessage", async (message, user, messageId, cb) => {
             try {
                 // const user = await chatController.checkUser(socket.id);
                 console.log("message: ", message);
-                const emoji = await chatController.sendEmoji(message, user);
+                console.log("user: ", user._id);
+                console.log("messageId: ", messageId);
+                const emoji = await chatController.sendEmoji(message, user, messageId);
                 console.log("emoji: ", emoji);
  
                 // 3초 후에 이모지 전송 이모지 로딩 테스트 나중에 삭제
